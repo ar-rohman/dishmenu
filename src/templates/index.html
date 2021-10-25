@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rayakan momen spesial lebaran dengan lezatnya aneka makanan dengan cita rasa asli indonesia">
+    <title>dishmenu - Makan Enak, Makan Hemat, Cari di dishmenu</title>
+    <link rel="preconnect" href="https://restaurant-api.dicoding.dev">
+    <link rel="icon" href="./images/favicon.png" type="image/png">
+</head>
+<body>
+    <div id="skip-link"></div>
+    <header class="fixed">
+        <div class="hamburger">
+            <button id="hamburger" aria-label="sidebar menu">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+                </svg>
+            </button>
+        </div>
+        <img src="./images/logo.png" alt="Logo Dishmenu" height="41" width="186">
+        <nav id="drawer">
+            <img src="./images/logo.png" alt="Logo Dishmenu" height="41" width="186">
+            <ul id="list-link">
+                <li>
+                    <a href="#/list" class="active" id="base">
+                        <svg xmlns="http://www.w3.org/2000/svg" id="home" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" id="home-solid" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                        </svg>
+                        <p>Home</p> 
+                    </a>
+                </li>
+                <li>
+                    <a href="#/favorite" id="favorite">
+                        <svg xmlns="http://www.w3.org/2000/svg" id="heart" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" id="heart-solid" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                        </svg>
+                        <p>Favorite</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/rohmanpendo" id="about">
+                        <svg xmlns="http://www.w3.org/2000/svg" id="info" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" id="info-solid" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                        </svg>
+                        <p>About Us</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>    
+    <main id="mainContent"></main>
+    <footer>
+        <p>Copyright &copy; 2021 - dishmenu</p>
+    </footer>
+</body>
+</html>

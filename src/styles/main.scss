@@ -1,0 +1,1090 @@
+$primary: #12acec;
+$text-color: #222121;
+$icon-color: #4b5563;
+
+@mixin icon($hw: 1.5rem, $color: $icon-color) {
+    height: $hw;
+    width: $hw;
+    color: $color;
+}
+
+@mixin resto-card($repeat) {
+    display: grid;
+    grid-template-columns: repeat($repeat, 1fr);
+    gap: 10px;
+    
+    .card {
+        margin-bottom: -4px;
+    }
+}
+
+@mixin link() {
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0); 
+}
+
+@mixin input() {
+    margin-top: 0.25rem;
+    display: block;
+    width: 100%;
+    border: 1px solid rgba(209,213,219,1);
+    border-radius: 5px;
+    padding: 0.5rem;
+
+    &:focus {
+        border: 2px solid $primary;
+    }
+}
+
+@mixin btn($bg: #ffffff, $border: none) {
+    text-align: center;
+    padding: 10px;
+    min-height: 44px;
+    min-width: 44px;
+    border: $border;
+    background-color: $bg;
+    cursor: pointer;
+}
+
+@mixin review-btn($color: $primary, $bg: $primary) {
+    @include btn($bg: $bg, $border: 2px solid $primary);
+    border-radius: 5px;
+    color: $color;
+    width: 100%;
+    margin: 0 5px;
+    margin-bottom: 1rem;
+
+    &:hover, &:focus {
+        color: #ffffff;
+        background-color: #057aab;
+    }
+
+    @media (min-width: 640px) {
+        width: 100px;
+    }
+}
+
+@mixin skeleton-bg($width, $height: 20px, $margin: 0.5rem 0) {
+    background-color: #e0e0e0;
+    height: $height;
+    width: $width;
+    margin: $margin;
+}
+
+@mixin skeleton-loading() {
+    .skeleton-loading {
+        width: 20px;
+        height: 100%;
+        background: rgb(224,224,224);
+        background: 
+        linear-gradient(
+            90deg, 
+            rgba(224,224,224,0.1) 0%, 
+            rgba(237,237,237,0.5) 25%, 
+            rgba(246,246,246,1) 50%, 
+            rgba(237,237,237,0.5) 75%, 
+            rgba(224,224,224,0.1) 100%
+        );
+        position: relative;
+        animation: skeletonLoading 0.75s infinite;
+    }
+      
+    @keyframes skeletonLoading {
+        from {
+            left: 0px;
+        }
+        to {
+            left: calc(100% - 1rem);
+        }
+    }
+}
+
+@font-face {
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Nunito'),
+        url('fonts/Nunito-Latin-Regular.woff2') format('woff2'),
+        url('fonts/Nunito-Latin-Regular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: local('Nunito'),
+        url('fonts/Nunito-Latin-SemiBold.woff2') format('woff2'),
+        url('fonts/Nunito-Latin-SemiBold.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: local('Nunito'),
+        url('./fonts/Nunito-Latin-Bold.woff2') format('woff2'),
+        url('fonts/Nunito-Latin-Bold.woff') format('woff');
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+    &:focus-visible {
+        outline: $primary auto 1px;
+    }
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    color: $text-color;
+}
+
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background-color: $primary;
+    color: #ffffff;
+    padding: 8px;
+    z-index: 50;
+
+    &:focus {
+        top: 0;
+    }
+}
+
+// Header
+header {
+    background-color: #ffffff;
+    box-shadow: 0 1px 5px 0 #dedcdc;
+    display: grid;
+    align-content: center;
+    grid-template-columns: 50px auto;
+    justify-self: center;
+    width: 100%;
+    z-index: 40;
+
+    @media (min-width: 640px) {
+        grid-template-columns: 1fr 2fr;
+    }
+
+    .hamburger {
+        display: grid;
+        align-content: center;
+        margin-left: 0.2rem;
+        min-width: 44px;
+        min-height: 44px;
+
+        button {
+            @include btn();
+
+            svg {
+                @include icon();
+            }
+
+           &:focus {
+                background-color: rgba(18, 172, 236, 0.1);
+                border-radius: 50%;
+                color: #ffffff;
+            }
+        }
+
+        @media (min-width: 640px) {
+            display: none;
+        }
+    }
+
+    img {
+        margin: 0.5rem 0 0.5rem -50px;
+        display: block;
+        justify-self: center;
+
+        @media (min-width: 640px) {
+            margin: 0.75rem 0.5rem;
+        }
+    }
+
+    nav {
+        align-items: center;
+        background-color: #ffffff;
+        width: 250px;
+        height: 100%;
+        position: fixed;
+        transform: translate(-250px, 0);
+        transition: transform 0.3s ease-in-out;
+        border-right: 1px solid #e4e4e4;
+
+        @media (min-width: 640px) {
+            position: relative;
+            display: grid;
+            width: 100%;
+            padding-right: 2rem;
+            transform: translate(0, 0);
+            border-right: none;
+        }
+
+        img {
+            margin: 1rem;
+
+            @media (min-width: 640px) {
+                display: none;
+            }
+        }
+
+        ul {
+            list-style-type: none;
+            display: grid;
+
+            @media (min-width: 640px) {
+                justify-self: end;
+                grid-template-columns: repeat(3, max-content);
+            }
+
+            li {
+                width: 100%;
+
+                a.active #home-solid, a.active #heart-solid, a.active #info-solid {
+                    display: block;
+                }
+
+                a.active #home, a.active #heart, a.active #info {
+                    display: none;
+                }
+
+                a {
+                    @include link();
+                    min-height: 66px;
+                    color: $icon-color;
+                    display: grid;
+                    align-content: center;
+                    transition: 0.3s;
+                    grid-template-columns: repeat(2, max-content);
+                    padding: 0 1.5rem;
+
+                    @media (min-width: 640px) {
+                        font-size: 1rem;
+                        display: inline-block;
+                        line-height: 66px;  
+                    }
+                    
+                    svg {
+                        @include icon(1.5rem, inherit);
+                        display: block;
+                        text-align: center;
+                        justify-self: center;
+
+                        @media (min-width: 640px) {
+                            display: inline-block;
+                            vertical-align: middle;
+                        }
+                    }
+
+                    p {
+                        line-height: 28px;
+                        margin-left: 0.5rem;
+
+                        @media (min-width: 640px) {
+                            display: inline-block;
+                            vertical-align: middle;
+                        }
+                    }
+
+                    #home-solid, #heart-solid, #info-solid {
+                        display: none;
+                    }
+
+                    &:hover, &:focus {
+                       color: $primary;
+                    }
+                                        
+                    &:hover #home-solid, &:hover #heart-solid, &:hover #info-solid,
+                    &:focus #home-solid, &:focus #heart-solid, &:focus #info-solid {
+                        display: block;
+                    }
+
+                    &:hover #home, &:hover #heart, &:hover #info,
+                    &:focus #home, &:focus #heart, &:focus #info {
+                        display: none;
+                    }
+                }
+
+                @media (min-width: 640px) {
+                    align-content: center;
+                    margin-left: 2rem;
+
+                    a.active #home-solid, a.active #heart-solid, a.active #info-solid {
+                        display: inline-block;
+                    }
+
+                    a {
+                        &:hover #home-solid, &:hover #heart-solid, &:hover #info-solid,
+                        &:focus #home-solid, &:focus #heart-solid, &:focus #info-solid {
+                            display: inline-block;
+                        }
+                    }
+                }  
+            }
+        }
+    }
+
+    nav.open {
+        transform: translate(0,0)
+    }
+}
+
+// Jumbotron
+ .hero {
+    margin-top: 6rem;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    min-height: 380px;
+    background: center / cover no-repeat; 
+    background-image: url('/images/heros/hero-image-2-small.jpg'); 
+
+    @media (min-width: 480px) {
+        background-image: url('/images/heros/hero-image-2-medium.jpg');
+    }
+
+    @media (min-width: 640px) {
+        background-image: url('/images/heros/hero-image-2-large.jpg');
+    }
+
+    @media (min-width: 768px) {
+        background-image: url('/images/heros/hero-image-2.jpg');
+    }
+
+    .inner {
+        margin: 0 auto;
+        padding: 1rem;
+        max-width: 100%;
+        background-color: rgba(0,0,0,0.6);
+        color: #ffffff;
+
+        .title {
+            font-weight: 700;
+            font-size: 1.5rem;
+            
+            span {
+                color: $primary;
+            }
+        }
+
+        .tagline {
+            margin-top: 1rem;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+    }
+}
+
+// Main content
+main {
+    position: absolute;
+    padding-bottom: 52px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+
+    h2 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        padding: 1rem;
+    }
+
+    img {
+        display: block;
+        max-width: 100%
+    }  
+}
+
+// Restaurant List
+.restaurant {
+    padding: 1rem;
+
+    a {
+        @include link();
+    }
+    .card {
+        box-shadow: #bfb6b6 0 1px 6px 0;
+        color: $text-color;
+        border-radius: 7px;
+        margin-bottom: 1rem;
+        
+        img {
+            border-top-right-radius: 7px;
+            border-top-left-radius: 7px;
+            width: 100%;
+            height: 270px;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .card-content {
+            margin: 0.25rem 0.5rem;
+
+            .title {
+                font-weight: 700;
+                margin: 0.5rem 0;
+                display: flex;
+            }
+
+            .description {
+                margin-bottom: 0.5rem;
+                max-height: 8rem;
+                -webkit-box-orient: vertical;
+                display: block;
+                display: -webkit-box;
+                overflow: hidden !important;
+                text-overflow: ellipsis;
+                -webkit-line-clamp: 3;
+            }
+
+            .location {
+                display: flex;
+                padding-bottom: 0.5rem;
+
+                svg {
+                    @include icon(1.25rem, rgb(255, 29, 21));
+                }
+
+                p {
+                    font-size: 0.75rem;
+                    padding-left: 0.15rem;
+                    color: $icon-color;
+                    line-height: 1.45rem;
+                }
+            }
+
+            .star {
+                display: flex;
+                padding-bottom: 0.5rem;
+
+                svg {
+                    @include icon(1.25rem, rgb(255, 166, 0));
+                }
+
+                p {
+                    font-size: 0.75rem;
+                    padding-left: 0.15rem;
+                    color: $icon-color;
+                    line-height: 1.45rem;
+                }
+            }
+        }
+    }
+
+    @media (min-width: 640px) {           
+        @include resto-card(2)
+    }
+
+    @media (min-width: 768px) {
+        @include resto-card(3)
+    }
+
+    @media (min-width: 1024px) {
+        @include resto-card(4)
+    }
+
+    @media (min-width: 1280px) {
+        @include resto-card(5)
+    }
+
+    @media (min-width: 1536px) {
+        @include resto-card(6)
+    }
+}
+
+// Restaurant Detail
+.restaurant-container {
+    max-width: 1200px;
+    margin: 1rem auto 0;
+
+    .restaurant-detail {
+        border-bottom: 1px solid #e4e4e4;
+        padding-bottom: 1rem;
+
+        @media (min-width: 640px) {
+            display: grid;
+            grid-template-columns: 2fr 3fr;
+        }
+
+        img {
+            width: 100%;
+            height: 384px;
+            object-fit: cover;
+            object-position: center;
+
+            @media (min-width: 640px) {
+                margin-left: 1rem;
+                border-radius: 7px;
+            }
+        }
+
+        .detail {
+            padding: 0 1rem;
+
+            @media (min-width: 640px) {
+                margin-left: 2rem;
+            }
+
+            .detail-title {
+                margin-top: 1rem;
+                font-weight: 700;
+                font-size: 1.2rem;
+
+                @media (min-width: 640px) {
+                    margin-top: 0;
+                }
+            }
+
+            .detail-icon {
+                display:flex;
+                padding-bottom: 0.5rem;
+
+                svg#red {
+                    @include icon(1.25rem, rgb(255, 29, 21));
+                }
+
+                svg#yellow {
+                    @include icon(1.25rem, rgb(255, 166, 0));
+                }
+
+                p {
+                    font-size: 0.75rem;
+                    padding-left: 0.15rem;
+                    color: $icon-color;
+                    line-height: 1.45rem;
+                    margin-right: 1rem;
+                }
+            }
+
+            .detail-desc {
+                margin: 1rem 0;
+
+                p {
+                    font-weight: 700;
+                    margin-bottom: 0.5rem;
+                }
+
+                .category {
+                    display: inline-block;
+                    padding: 4px 8px;
+                    background-color: rgba(18, 172, 236, 0.1);
+                    color: $primary;
+                    font-weight: 700;
+                    border-radius: 4px;
+                    margin-bottom: 0.5rem;
+                }
+            }
+        }
+    }
+
+    .restaurant-menu {
+        padding: 1rem; 
+        border-bottom: 1px solid #e4e4e4;
+
+        .menu-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .food-title {
+            font-weight: 600;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .menu-box {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .food-box {
+            display: flex;
+            align-items: center;
+            border: 1px solid #e4e4e4;
+            border-radius: 7px;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+            padding: 0.5rem;
+
+            .food-icon-bg {
+                background-color: rgba(18, 172, 236, 0.1);
+                height: 2.5rem;
+                width: 2.5rem;
+                display: flex;
+                justify-content: center;
+                border-radius: 50%;
+                
+                svg {
+                    align-self: center;
+                    @include icon(1.5rem, $primary);
+                }
+            }
+
+            p {
+                margin-left: 0.5rem;
+            }
+        }
+    }
+
+    .review-list {
+        padding: 1rem;
+        margin-bottom: 4rem;
+
+        .review-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .add-review-btn {
+            display: flex;
+            justify-content: flex-end;
+            max-width: 768px;
+            margin: 1rem 0 2rem;
+            
+            a {
+                @include btn($bg: $primary);
+                @include link();
+                border-radius: 5px;
+                color: #ffffff;
+                display: flex;
+                align-items: center;
+
+                svg {
+                    @include icon($hw: 1.25rem, $color: #ffffff);
+                    margin-right: 0.5rem;
+                }
+
+                &:hover, &:focus {
+                    background-color: #057aab;
+                } 
+            }
+        }
+        
+        .review-box {
+            margin-top: 1rem;
+            display: flex;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e4e4e4;
+
+            .review-icon {
+                background-color: rgba(0, 0, 0, 0.2);
+                height: 3rem;
+                width: 3rem;
+                display: flex;
+                justify-content: center;
+                border-radius: 50%;
+                margin-right: 1rem;
+                flex: 0 0 3rem;
+
+                svg {
+                    align-self: center;
+                    @include icon(1.5rem, $icon-color);
+                }
+            }
+
+            .review-content {
+                .reviewer {
+                    font-weight: 600;
+                }
+                .review-date {
+                    font-size: 0.7rem;
+                }
+
+                p {
+                    margin-top: 0.75rem;
+                    max-width: 768px;
+                    word-wrap: break-word;
+                }
+            }
+        }
+    }
+}
+
+// Add Review
+.add-review {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+
+    .add-review-content {
+        width: 100%;
+
+        @media (min-width: 640px) {
+            width: 512px;
+        }
+        
+        .add-review-form {
+            margin-top: 1rem;
+            
+            .input-group {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 1.5rem;
+
+                label {
+                    display: block;
+                }
+
+                input {
+                    @include input();
+                }
+
+                textarea {
+                    @include input();
+                }
+            }
+
+            .btn {
+                display: flex;
+                flex-direction: column-reverse;
+                width: 100%;
+                margin-bottom: 1.5rem;
+
+                @media (min-width: 640px) {
+                    justify-content: flex-end;
+                    flex-direction: row;
+                }
+
+                .submit {
+                    @include review-btn($color: #ffffff)
+                }
+
+                .cancel {
+                    @include review-btn($bg: #ffffff)
+                }
+            }
+        }
+    }
+}
+
+// Add Favorite
+.add-favorite {
+    position: fixed;
+    bottom: 4rem;
+    right: 1.5rem;
+    
+    button {
+        @include btn($bg: $primary);
+        border-radius: 50%;
+        height: 50px;
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #ffffff;
+
+        svg {
+            @include icon($color: #ffffff);
+        }
+
+        &:hover, &:focus {
+            background-color: #057aab;
+        }
+    }
+}
+
+// Footer
+footer {
+    background-color: #ffffff;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding: 1rem 0;
+    border-top: 1px solid #e4e4e4;
+
+    p {
+        text-align: center;
+    }
+}
+
+// Back Section
+.back-section {
+    border-bottom: 1px solid #e4e4e4;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #ffffff;
+    z-index: 40;
+
+    button {
+        @include btn();
+
+        svg {
+            @include icon(1.25rem);
+        }
+    }
+}
+
+// Error Page
+.error-page {
+    padding: 1rem;
+    margin: 1rem auto;
+
+    @media (min-width: 640px) {
+        max-width: 512px;
+    }
+
+    .box {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        background-color: rgba(255, 29, 21, 0.1);
+        border-radius: 7px;
+        border: 1px solid rgba(255, 29, 21, 0.4);
+        padding: 2rem;
+
+        @media (min-width: 640px) {
+            flex-direction: row;
+            align-items: flex-start;
+        }
+
+        .icon {
+            background-color: rgba(255, 29, 21, 0.2);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+
+            svg {
+                @include icon($hw: 1.5rem, $color: rgb(255, 29, 21));
+            }
+        }
+
+        .content {
+            margin-top: 1rem;
+            text-align: center;
+
+            .title {
+                font-size: 1rem;
+                font-weight: 700;
+                margin-bottom: 0.5rem;
+            }
+
+            @media (min-width: 640px) {
+                margin-top: 0;
+                text-align: left;
+                margin-left: 1rem;
+            }
+        }
+    }  
+}
+
+// Skeleton List
+.skeleton-list {
+    .skeleton-card {
+        background-color: #f0f0f0;
+        border-radius: 7px;
+                
+        .skeleton-img {
+            border-top-right-radius: 7px;
+            border-top-left-radius: 7px;
+            height: 270px;
+            background-color: #e0e0e0;
+            @include skeleton-loading();
+        }
+
+        .skeleton-content {
+            padding: 0.5rem;
+
+            .skeleton-title {
+                @include skeleton-bg($width: 50%);
+                @include skeleton-loading();
+            }
+
+            .skeleton-description {
+                @include skeleton-bg($width: 100%);
+                @include skeleton-loading();
+            }
+
+            .skeleton-location-star {
+                @include skeleton-bg($width: 20%);
+                @include skeleton-loading();
+            }
+        }
+    }
+}
+
+// Skeleton Detail
+.skeleton-detail {
+    background-color: #f0f0f0;
+
+    .skeleton-wraper {
+        border-radius: 7px;
+        padding-bottom: 1rem;
+
+        @media (min-width: 640px) {
+            display: grid;
+            grid-template-columns: 2fr 3fr;
+            padding: 1rem;
+            padding-bottom: 0;
+        }
+
+        .skeleton-img {
+            width: 100%;
+            height: 384px;
+            background-color: #e0e0e0;
+            @include skeleton-loading();
+
+            @media (min-width: 640px) {
+                border-radius: 7px;
+            }
+        }
+
+        .skeleton-content {
+            padding: 0 1rem;
+
+            @media (min-width: 640px) {
+                margin-left: 2rem;
+            }
+
+            .skeleton-title {
+                @include skeleton-bg($width: 50%, $margin: 1.5rem 0);
+                @include skeleton-loading();
+            }
+
+            .skeleton-desc {
+                @include skeleton-bg($width: 100%);
+                @include skeleton-loading();
+            }
+
+            .skeleton-address {
+                @include skeleton-bg($width: 30%, $margin: 1rem 0);
+                @include skeleton-loading();
+            }
+        }
+    }
+
+    .skeleton-menu {
+        padding: 1rem;
+
+        .skeleton-menu-title {
+            @include skeleton-bg($width: 100px, $margin: 2.5rem 0 0.5rem 0);
+            @include skeleton-loading();
+        }
+        .skeleton-menu-box {
+            display: flex;
+
+            .skeleton-menu-content {
+                border-radius: 7px;
+                @include skeleton-bg($height: 75px, $width: 200px, $margin: 0.5rem 1rem 0.5rem 0);
+                @include skeleton-loading();
+            }
+        }
+    }
+}
+
+// Skeleton Review
+.skeleton-review {
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 7px;
+    background-color: #f0f0f0;
+
+    .skeleton-review-title {
+        @include skeleton-bg($width: 150px, $height: 30px, $margin: 0.5rem 0 1rem);
+        @include skeleton-loading();
+    }
+
+    .skeleton-review-box {
+        display: flex;
+        justify-content: center;
+
+        .skeleton-review-content {
+            width: 100%;
+
+            @media (min-width: 640px) {
+                width: 512px;
+            }
+            
+            .skeleton-review-text {
+                @include skeleton-bg($width: 100%, $margin: 0.5rem 0 1rem);
+                @include skeleton-loading();
+            }
+
+            .skeleton-review-label {
+                @include skeleton-bg($width: 100px, $margin: 1.5rem 0 0.5rem);
+                @include skeleton-loading();
+            }
+
+            .skeleton-review-input {
+                @include skeleton-bg($width: 100%, $height: 50px, $margin: 0.5rem 0 1rem);
+                @include skeleton-loading();
+            }
+
+            .skeleton-review-btn {
+                display: flex;
+                flex-direction: column-reverse;
+                width: 100%;
+
+                @media (min-width: 640px) {
+                    justify-content: flex-end;
+                    flex-direction: row;
+                }
+
+               .skeleton-review-cancel {
+                    @include skeleton-bg($width: 100%, $height: 50px);
+                    @include skeleton-loading();
+
+                    @media (min-width: 640px) {
+                        @include skeleton-bg($width: 120px, $height: 50px, $margin: 0.5rem 10px 0.5rem 0);
+                    }
+                }
+
+                .skeleton-review-submit {
+                    @include skeleton-bg($width: 100%, $height: 50px, $margin: 0.5rem 0);
+                    @include skeleton-loading();
+
+                    @media (min-width: 640px) {
+                        @include skeleton-bg($width: 120px, $height: 50px, $margin: 0.5rem 0 0.5rem 10px);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.active {
+    color: $primary;
+    background-color: rgba(18, 172, 236, 0.1);
+    border-left: 4px solid #12acec;
+
+    @media (min-width: 640px) {
+        border-left: none;
+        border-bottom: 3px solid #12acec;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.pt-5 {
+    padding-top: 5rem;
+}
+
+.pt-4 {
+    padding-top: 4rem;
+}
+
+.pt-3 {
+    padding-top: 3rem;
+}
+
+.fixed {
+    position: fixed;
+    top: 0;
+}
